@@ -25,7 +25,7 @@ class Invoice extends React.Component {
         await axios(setting)
             .then(function(response) {
                 self.setState({ listTransaksi: response.data });
-                console.log("show trx ", response.data);
+                console.log("show tr ok", response.data);
             })
             .catch(function(error) {
                 console.log("error ni", error);
