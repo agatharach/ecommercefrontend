@@ -6,9 +6,8 @@ export const store = createStore({
     alamat: "",
     status: "",
     nomorhp: "",
-    token: "",
     user_id: "",
-    baseUrl: "http://0.0.0.0:5000"
+    baseUrl: "https://api.beras-a.xyz"
 });
 
 export const actions = store => ({
@@ -21,11 +20,7 @@ export const actions = store => ({
     },
 
     downToken(state) {
-        return { token: "" };
-    },
-
-    setToken(state, token) {
-        return { token: token };
+        return { token: localStorage.setItem("token", "") };
     },
 
     setName(state, name) {

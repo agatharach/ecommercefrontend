@@ -10,11 +10,13 @@ class InputBarang extends React.Component {
         super(props);
         this.state = {
             user_id: "",
+            username: "",
             name: "",
             stok: 0,
             harga: 0,
             category: "",
-            urlfoto: ""
+            urlfoto: "",
+            deskripsi: ""
         };
         this.InputBarang = this.InputBarang.bind(this);
     }
@@ -24,27 +26,30 @@ class InputBarang extends React.Component {
         e.preventDefault();
         console.log(self.props);
         let data = {
-            user_id: self.props.user_id,
+            user_id: localStorage.getItem("user_id"),
+            username: self.state.username,
             name: self.state.name,
             stok: self.state.stok,
             harga: self.state.harga,
             category: self.state.category,
-            urlfoto: self.state.urlfoto
+            urlfoto: self.state.urlfoto,
+            deskripsi: self.state.deskripsi
         };
         console.log(data);
 
         let setting = {
-            method: "POST",
+            method: "post",
             url: self.props.baseUrl + "/items/tambah",
             data: data,
             headers: {
-                Authorization: "Bearer " + self.props.token
+                Authorization: "Bearer " + localStorage.getItem("token")
             }
         };
 
         axios(setting)
             .then(function(response) {
                 console.log("BERHASIL!");
+                self.props.history.replace("/items");
             })
             .catch(function(error) {
                 console.log("error cuy!", error);
@@ -77,8 +82,26 @@ class InputBarang extends React.Component {
                                                                 width: "100%"
                                                             }}
                                                             type="text"
-                                                            name="name"
-                                                            placeholder="Namabarang"
+                                                            name="username"
+                                                            placeholder="username toko"
+                                                            onChange={e => {
+                                                                e.preventDefault();
+                                                                this.setState({
+                                                                    username:
+                                                                        e.target
+                                                                            .value
+                                                                });
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <input
+                                                            style={{
+                                                                width: "100%"
+                                                            }}
+                                                            type="text"
+                                                            name="nama"
+                                                            placeholder="nama barang"
                                                             onChange={e => {
                                                                 e.preventDefault();
                                                                 this.setState({
@@ -100,9 +123,10 @@ class InputBarang extends React.Component {
                                                             onChange={e => {
                                                                 e.preventDefault();
                                                                 this.setState({
-                                                                    stok:
+                                                                    stok: parseInt(
                                                                         e.target
                                                                             .value
+                                                                    )
                                                                 });
                                                             }}
                                                         />
@@ -118,10 +142,9 @@ class InputBarang extends React.Component {
                                                             onChange={e => {
                                                                 e.preventDefault();
                                                                 this.setState({
-                                                                    harga: parseInt(
+                                                                    harga:
                                                                         e.target
                                                                             .value
-                                                                    )
                                                                 });
                                                             }}
                                                         />
@@ -162,13 +185,31 @@ class InputBarang extends React.Component {
                                                             }}
                                                         />
                                                     </div>
+                                                    <div>
+                                                        <input
+                                                            style={{
+                                                                width: "100%"
+                                                            }}
+                                                            type="text"
+                                                            name="deskripsi"
+                                                            placeholder="deskripsi"
+                                                            onChange={e => {
+                                                                e.preventDefault();
+                                                                this.setState({
+                                                                    deskripsi:
+                                                                        e.target
+                                                                            .value
+                                                                });
+                                                            }}
+                                                        />
+                                                    </div>
                                                     <button
                                                         className="btn btn-secondary"
                                                         onClick={e =>
                                                             this.InputBarang(e)
                                                         }
                                                     >
-                                                        SignUp
+                                                        Tambah Barang
                                                     </button>
                                                 </form>
                                             </section>
@@ -184,6 +225,6 @@ class InputBarang extends React.Component {
     }
 }
 export default connect(
-    "baseUrl,token,user_id",
+    "baseUrl",
     actions
 )(InputBarang);

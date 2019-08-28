@@ -80,29 +80,24 @@ class SignUp extends React.Component {
                 }
             })
             .then(function(response) {
-                self.props.setToken(response.data.token);
+                localStorage.setItem("token", response.data.token);
                 console.log(response.data.token);
-                self.props.login();
+                localStorage.setItem("status", true);
             })
             .catch(function(error) {
                 console.log("ambil token error cuy!", error);
             });
-
-        data = {
-            user_id: self.props.user_id
-        };
         let setting = {
             method: "GET",
             url: self.props.baseUrl + "/users/whoisme",
-            data: data,
             headers: {
-                Authorization: "Bearer" + self.props.token
+                Authorization: "Bearer " + localStorage.getItem("token")
             }
         };
 
         await axios(setting)
             .then(function(response) {
-                self.props.setUserid(response.data.id);
+                localStorage.setItem("user_id", response.data.id);
                 console.log(response.data.id);
                 self.props.history.replace("/profile");
             })

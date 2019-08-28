@@ -7,16 +7,13 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import Profile from "./pages/Profile";
+import Profile from "./component/Profile";
 import InputBarang from "./pages/PostBarang";
-import Category from "./pages/Category";
-// import Anime from "./page/Anime";
-// import AnimeKategori from "./page/AnimeKategori";
-// import Manga from "./page/Manga";
-// import MangaKategori from "./page/MangaKategori";
-// import NotFound from "./page/NotFound";
-// import Book from "./page/Book";
-// import ShowBarang from "./page/Lapak";
+import ShowBarang from "./pages/Category";
+import ItemsDetail from "./pages/ItemsDetail";
+import Carts from "./pages/Carts";
+import Transaksi from "./pages/Transaksi";
+import Invoice from "./pages/Invoice";
 
 function App() {
     return (
@@ -28,16 +25,16 @@ function App() {
                     <Route exact path="/signup" component={SignUp} />
                     <Route exact path="/profile" component={Profile} />
                     <Route exact path="/inputbarang" component={InputBarang} />
-                    <Route exact path="/items" component={Category} />
-                    {/* <Route exact path="/anime" component={Anime} />
-                    <Route path="/anime/:genre" component={AnimeKategori} />
-                    <Route path="/books" component={Book} />
-                    <Route exact path="/show" component={ShowBarang} />
-                    <Route path="/manga/:genre" component={MangaKategori} />
-                    <Route component={NotFound} /> */}{" "}
-                    */}
-                </Switch>{" "}
-                */}
+                    <Route exact path="/items" component={ShowBarang} />
+                    <Route
+                        exact
+                        path="/items/list/:item_id"
+                        component={ItemsDetail}
+                    />
+                    <Route exact path="/carts/:cart_id" component={Carts} />
+                    <Route exact path="/checkout" component={Transaksi} />
+                    <Route exact path="/checkout/:id" component={Invoice} />
+                </Switch>
             </BrowserRouter>
         </Provider>
     );

@@ -1,14 +1,5 @@
-import React, { Component } from "react";
-import {
-    Navbar,
-    Nav,
-    NavItem,
-    NavDropdown,
-    MenuItem,
-    Form,
-    FormControl,
-    Button
-} from "react-bootstrap";
+import React from "react";
+import { Navbar, Nav } from "react-bootstrap";
 import cart from "../Aset/shopping-cart-of-checkered-design.png";
 
 function NavBar() {
@@ -26,8 +17,8 @@ function NavBar() {
                     <Nav>
                         <Nav.Link href="/login">Log In</Nav.Link>
                         <Nav.Link href="/signup">Sign Up</Nav.Link>
-
-                        <Nav.Link href="/cart">
+                        <Nav.Link href="/items">Shop</Nav.Link>
+                        <Nav.Link href="/">
                             <img
                                 alt=""
                                 src={cart}

@@ -1,41 +1,34 @@
 import React from "react";
-import ListCart from "../component/ListCart";
+import ListTransaksi from "../component/ListTransaksi";
 import NavBarPos from "../component/NavbarAfterLogin";
 import { connect } from "unistore/react";
 import { actions } from "../store";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-class Carts extends React.Component {
+class Invoice extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            listCart: [],
-            status: "",
-            metodebayar: "",
-            kurir: ""
+            listTransaksi: []
         };
     }
-
     componentDidMount = async () => {
         const self = this;
         const setting = {
             method: "get",
             url:
-                self.props.baseUrl +
-                `/carts/${self.props.match.params.cart_id}`,
+                self.props.baseUrl + `/transaksi/${self.props.match.params.id}`,
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
             }
         };
         await axios(setting)
             .then(function(response) {
-                self.setState({ listCart: response.data });
-                console.log("show cart ok", response.data);
+                self.setState({ listTransaksi: response.data });
+                console.log("show trx ok", response.data);
             })
             .catch(function(error) {
                 console.log("error ni", error);
-                alert("Lakukan Pembelian Barang untuk Melihat Isi Cart!");
             });
     };
     render() {
@@ -44,7 +37,7 @@ class Carts extends React.Component {
                 <NavBarPos />
                 <div className="container" style={{ marginTop: 120 }}>
                     <div className="row">
-                        {this.state.listCart.map((item, key) => {
+                        {this.state.listTransaksi.map((item, key) => {
                             return (
                                 <div
                                     className="col-3"
@@ -53,14 +46,14 @@ class Carts extends React.Component {
                                         backgroundColor: "white"
                                     }}
                                 >
-                                    <ListCart item={item} />
+                                    {alert(
+                                        "Untuk melengkapi pembayaran, silahkan transfer ke 03421518 Bank BNI atas nama PT Beras-A"
+                                    )}
+                                    <ListTransaksi item={item} />
                                 </div>
                             );
                         })}
                     </div>
-                    <Link to="/checkout">
-                        <button className="btn btn-secondary">Check Out</button>
-                    </Link>
                 </div>
             </div>
         );
@@ -69,4 +62,4 @@ class Carts extends React.Component {
 export default connect(
     "baseUrl",
     actions
-)(Carts);
+)(Invoice);
