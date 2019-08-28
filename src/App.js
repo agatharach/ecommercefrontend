@@ -14,6 +14,7 @@ import ItemsDetail from "./pages/ItemsDetail";
 import Carts from "./pages/Carts";
 import Transaksi from "./pages/Transaksi";
 import Invoice from "./pages/Invoice";
+import NotFound from "./pages/NotFound";
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                     <Route exact path="/carts/:cart_id" component={Carts} />
                     <Route exact path="/checkout" component={Transaksi} />
                     <Route exact path="/checkout/:id" component={Invoice} />
+                    <Route component={NotFound} />
                 </Switch>
             </BrowserRouter>
         </Provider>
