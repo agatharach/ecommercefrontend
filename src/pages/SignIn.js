@@ -89,7 +89,7 @@ class SignIn extends React.Component {
                                                 onSubmit={this.handleSubmit}
                                                 className="border p-5 align-self-center text-center"
                                             >
-                                                <h4>Testing</h4>
+                                                <h4>Sign In</h4>
                                                 <div>
                                                     <input
                                                         style={{
