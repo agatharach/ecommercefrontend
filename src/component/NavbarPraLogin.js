@@ -7,7 +7,7 @@ function NavBar() {
         <div className="header">
             <Navbar className="shadow py-1" expand="md" fixed="top">
                 <Navbar.Brand href="/">
-                    <span className="align-self-center">{"BERAS-A"}</span>
+                    <span className="align-self-center">{"BERAS-B"}</span>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse
